@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GaliGuía · Guía turística de Galicia</title>
+<meta name="description" content="Descubre playas, ciudades, pueblos, naturaleza, rutas y gastronomía de Galicia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg: #F1F3EC;
+  --bg-alt: #E7EBE0;
+  --surface: #FFFFFF;
+  --ink: #142420;
+  --ink-soft: #445048;
+  --teal: #0D3B40;
+  --teal-2: #145059;
+  --forest: #1F4D3E;
+  --brick: #A6402D;
+  --brick-2: #8C3324;
+  --granite: #707970;
+  --line: #D7DCCF;
+  --gold: #C79A3B;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 14px;
+  --shadow-sm: 0 1px 2px rgba(20,36,32,.06), 0 1px 1px rgba(20,36,32,.04);
+  --shadow-md: 0 8px 24px rgba(20,36,32,.10), 0 2px 6px rgba(20,36,32,.06);
+  --shadow-lg: 0 24px 60px rgba(13,59,64,.22);
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+}
+img{max-width:100%; display:block;}
+a{color:inherit;}
+button{font-family:inherit; cursor:pointer;}
+:focus-visible{outline:2.5px solid var(--brick); outline-offset:3px; border-radius:4px;}
+
+h1,h2,h3,h4{font-family:var(--font-display); margin:0; font-weight:600; letter-spacing:-.01em; color:var(--teal);}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--brick);
+  font-weight:500;
+}
+
+.wrap{max-width:1240px; margin:0 auto; padding:0 24px;}
+@media (max-width:640px){ .wrap{padding:0 18px;} }
+
+/* ============ CONTOUR DIVIDER (signature motif) ============ */
+.contour{
+  width:100%; height:34px; display:block;
+  color:var(--teal);
+}
+.contour path{ vector-effect:non-scaling-stroke; }
+
+/* ============ HEADER ============ */
+header.site{
+  position:sticky; top:0; z-index:50;
+  background:rgba(241,243,236,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  display:flex; align-items:center; gap:20px;
+  padding:14px 24px;
+  max-width:1240px; margin:0 auto;
+}
+.logo{
+  display:flex; align-items:center; gap:9px;
+  font-family:var(--font-display); font-weight:700; font-size:1.32rem;
+  color:var(--teal); white-space:nowrap; text-decoration:none;
+}
+.logo svg{width:30px; height:30px; flex-shrink:0;}
+
+.search-form{
+  flex:1; display:flex; align-items:center; gap:10px;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  padding:9px 8px 9px 18px;
+  max-width:520px; margin-left:auto;
+  transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.search-form:focus-within{ border-color:var(--teal); box-shadow:0 0 0 4px rgba(13,59,64,.08); }
+.search-form input{
+  border:0; outline:0; background:transparent; flex:1;
+  font-family:var(--font-body); font-size:.95rem; color:var(--ink); min-width:0;
+}
+.search-form input::placeholder{color:var(--granite);}
+.search-form button{
+  border:0; background:var(--teal); color:#fff; width:34px; height:34px;
+  border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:background .15s;
+}
+.search-form button:hover{background:var(--brick);}
+.search-form svg{width:16px; height:16px;}
+
+.search-toggle{display:none;}
+@media (max-width:600px){
+  .header-inner{padding:12px 18px; gap:10px;}
+  .logo span.word{font-size:1.12rem;}
+  .search-form{display:none; position:absolute; left:0; right:0; top:100%; margin:0; padding:10px 16px; border-radius:0; border-top:1px solid var(--line); max-width:none; background:var(--bg);}
+  .search-form.open{display:flex;}
+  .search-toggle{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%; border:1.5px solid var(--line);
+    background:var(--surface); margin-left:auto; flex-shrink:0;
+  }
+  .search-toggle svg{width:17px;height:17px;color:var(--teal);}
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative; overflow:hidden;
+  background:linear-gradient(165deg, var(--teal) 0%, var(--teal-2) 55%, var(--forest) 100%);
+  color:#fff;
+  padding:76px 0 0;
+}
+.hero-inner{
+  max-width:1240px; margin:0 auto; padding:0 24px 64px;
+  position:relative; z-index:2;
+}
+.hero .eyebrow{color:var(--gold);}
+.hero h1{
+  color:#fff; font-size:clamp(2.4rem, 6vw, 4.4rem); line-height:1.03; margin:14px 0 20px;
+  max-width:15ch;
+}
+.hero h1 em{ font-style:italic; color:var(--gold); }
+.hero p.lede{
+  font-size:clamp(1rem, 2vw, 1.2rem); max-width:46ch; color:rgba(255,255,255,.86); margin:0 0 34px;
+}
+.hero-stats{
+  display:flex; gap:34px; margin-top:44px; flex-wrap:wrap;
+}
+.hero-stats div{font-family:var(--font-mono); font-size:.78rem; color:rgba(255,255,255,.72); text-transform:uppercase; letter-spacing:.08em;}
+.hero-stats strong{display:block; font-family:var(--font-display); font-size:1.7rem; color:#fff; letter-spacing:0; font-weight:600;}
+
+.hero-map{
+  position:absolute; top:0; right:-4%; height:100%; width:62%;
+  opacity:.5; z-index:1; pointer-events:none;
+}
+@media (max-width:820px){ .hero-map{width:100%; opacity:.28; right:-30%;} }
+
+.hero-bottom-contour{ position:relative; z-index:2; color:var(--bg); }
+
+/* ============ CATEGORY NAV ============ */
+.cat-section{ padding:46px 0 8px; }
+.cat-heading{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
+.cat-scroll{
+  display:flex; gap:12px; overflow-x:auto; padding:2px 2px 14px;
+  scrollbar-width:none;
+}
+.cat-scroll::-webkit-scrollbar{display:none;}
+.cat-chip{
+  display:flex; align-items:center; gap:9px; flex-shrink:0;
+  background:var(--surface); border:1.5px solid var(--line); border-radius:999px;
+  padding:10px 18px 10px 12px; font-weight:600; font-size:.92rem; color:var(--ink-soft);
+  transition:all .16s var(--ease); border-color:var(--line);
+}
+.cat-chip .ico{
+  width:30px; height:30px; border-radius:50%; background:var(--bg-alt); color:var(--teal);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .16s, color .16s;
+}
+.cat-chip .ico svg{width:16px; height:16px;}
+.cat-chip .count{font-family:var(--font-mono); font-size:.72rem; color:var(--granite);}
+.cat-chip:hover{ border-color:var(--teal); }
+.cat-chip.active{ background:var(--teal); border-color:var(--teal); color:#fff; }
+.cat-chip.active .ico{ background:rgba(255,255,255,.16); color:#fff; }
+.cat-chip.active .count{ color:rgba(255,255,255,.7); }
+
+/* ============ GRID ============ */
+.results-section{ padding:26px 0 90px; }
+.results-meta{ display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:10px;}
+.results-meta p{ margin:0; color:var(--ink-soft); font-size:.94rem; }
+.results-meta button{
+  border:1.5px solid var(--line); background:var(--surface); border-radius:999px; padding:7px 15px;
+  font-size:.82rem; font-weight:600; color:var(--ink-soft); display:none;
+}
+.results-meta button.show{display:inline-flex; align-items:center; gap:6px;}
+
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(272px,1fr)); gap:22px;
+}
+
+.card{
+  background:var(--surface); border-radius:var(--radius); overflow:hidden;
+  border:1px solid var(--line); box-shadow:var(--shadow-sm);
+  display:flex; flex-direction:column; text-align:left; width:100%;
+  transition:transform .22s var(--ease), box-shadow .22s var(--ease);
+}
+.card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); }
+
+.card-media{
+  position:relative; aspect-ratio:4/3; overflow:hidden;
+  background:linear-gradient(135deg, var(--cat-color, var(--teal)) 0%, var(--ink) 140%);
+}
+.card-media .map-tile{
+  position:absolute; inset:0; opacity:.5;
+}
+.card-media .ico-big{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,.85);
+}
+.card-media .ico-big svg{width:44px; height:44px;}
+.card-media img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity .5s var(--ease);
+}
+.card-media img.loaded{opacity:1;}
+.card-media .place-label{
+  position:absolute; left:12px; bottom:10px; z-index:2;
+  font-family:var(--font-mono); font-size:.68rem; letter-spacing:.05em;
+  color:rgba(255,255,255,.85); background:rgba(0,0,0,.28); padding:3px 9px; border-radius:999px;
+}
+.card-body{ padding:16px 18px 20px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.card-body .eyebrow{ display:flex; align-items:center; gap:6px; }
+.card-body h3{ font-size:1.18rem; color:var(--ink); line-height:1.2; }
+.card-body .loc{ font-size:.8rem; color:var(--granite); font-family:var(--font-mono); display:flex; align-items:center; gap:5px;}
+.card-body .loc svg{width:12px;height:12px;flex-shrink:0;}
+.card-body p.desc{ font-size:.9rem; color:var(--ink-soft); margin:2px 0 4px; flex:1; }
+.card-cta{
+  display:flex; align-items:center; gap:6px; font-weight:700; font-size:.86rem; color:var(--brick);
+  margin-top:auto;
+}
+.card-cta svg{width:14px; height:14px; transition:transform .18s var(--ease);}
+.card:hover .card-cta svg{ transform:translateX(3px); }
+
+.empty-state{
+  text-align:center; padding:70px 20px; color:var(--ink-soft);
+}
+.empty-state h3{color:var(--teal); margin-bottom:8px;}
+
+/* ============ DETAIL OVERLAY ============ */
+.overlay-bg{
+  position:fixed; inset:0; background:rgba(10,20,18,.55); backdrop-filter:blur(2px);
+  z-index:100; opacity:0; pointer-events:none; transition:opacity .25s var(--ease);
+}
+.overlay-bg.open{ opacity:1; pointer-events:auto; }
+
+.detail{
+  position:fixed; z-index:101; top:0; right:0; height:100%;
+  width:min(680px, 100%);
+  background:var(--bg);
+  box-shadow:var(--shadow-lg);
+  transform:translateX(100%);
+  transition:transform .34s var(--ease);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.detail.open{ transform:translateX(0); }
+
+.detail-hero{ position:relative; aspect-ratio:16/10; background:linear-gradient(135deg, var(--cat-color, var(--teal)), var(--ink)); overflow:hidden;}
+.detail-hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s var(--ease); }
+.detail-hero img.loaded{opacity:1;}
+.detail-hero .ico-big{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.85);}
+.detail-hero .ico-big svg{width:60px;height:60px;}
+.detail-close{
+  position:absolute; top:16px; right:16px; z-index:5;
+  width:40px; height:40px; border-radius:50%; border:0; background:rgba(10,20,18,.55);
+  color:#fff; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);
+}
+.detail-close svg{width:18px;height:18px;}
+.detail-back{
+  position:absolute; top:16px; left:16px; z-index:5; display:none;
+  width:40px; height:40px; border-radius:50%; border:0; background:rgba(10,20,18,.55); color:#fff;
+  align-items:center; justify-content:center;
+}
+.detail-back svg{width:18px;height:18px;}
+
+.detail-body{ padding:26px 30px 70px; }
+@media (max-width:600px){ .detail-body{padding:22px 20px 60px;} }
+.detail-body .eyebrow{display:flex;align-items:center;gap:6px;}
+.detail-body h2{ font-size:clamp(1.6rem,4vw,2.2rem); margin:8px 0 6px; }
+.detail-loc{ font-family:var(--font-mono); font-size:.85rem; color:var(--granite); display:flex; align-items:center; gap:6px; margin-bottom:22px;}
+.detail-loc svg{width:14px;height:14px;}
+
+.detail-desc{ font-size:1.02rem; color:var(--ink-soft); margin-bottom:8px; }
+
+.detail-section{ margin-top:32px; padding-top:26px; border-top:1px solid var(--line); }
+.detail-section h4{
+  display:flex; align-items:center; gap:10px; font-size:1.02rem; color:var(--teal); margin-bottom:14px;
+}
+.detail-section h4 .ico{
+  width:32px; height:32px; border-radius:50%; background:var(--bg-alt); display:flex; align-items:center; justify-content:center; color:var(--brick); flex-shrink:0;
+}
+.detail-section h4 .ico svg{width:16px;height:16px;}
+.detail-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+.detail-list li{ display:flex; gap:10px; font-size:.95rem; color:var(--ink-soft); align-items:flex-start;}
+.detail-list li::before{
+  content:''; width:6px; height:6px; border-radius:50%; background:var(--brick); margin-top:8px; flex-shrink:0;
+}
+.detail-howto{ font-size:.95rem; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px;}
+
+/* ============ FOOTER ============ */
+footer{ background:var(--teal); color:rgba(255,255,255,.78); padding:50px 0 30px; }
+.footer-inner{ display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+footer .logo{ color:#fff; margin-bottom:10px; }
+footer p{ font-size:.88rem; max-width:34ch; margin:0; }
+.footer-cats{ display:flex; flex-wrap:wrap; gap:10px 22px; font-size:.86rem; }
+.footer-bottom{
+  margin-top:38px; padding-top:20px; border-top:1px solid rgba(255,255,255,.14);
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.03em; color:rgba(255,255,255,.5);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
+
+.sr-only{ position:absolute; width:1px;height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-inner">
+    <a href="#top" class="logo" aria-label="GaliGuía, inicio">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M16 3c5 6 9 10.5 9 16a9 9 0 1 1-18 0c0-5.5 4-10 9-16Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 19c1.5 2 3.5 3 7 3s5.5-1 7-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span class="word">GaliGuía</span>
+    </a>
+    <form class="search-form" id="searchForm" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--granite)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Busca un destino, pueblo o plato…" aria-label="Buscar destino">
+      <button type="submit" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+    <button class="search-toggle" id="searchToggle" aria-label="Abrir buscador">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <svg class="hero-map" viewBox="0 0 500 620" preserveAspectRatio="xMidYMid slice">
+      <path d="M120 10 C 60 60, 40 120, 70 170 C 30 200, 10 260, 40 300 C 15 330, 20 390, 60 410 C 40 450, 60 500, 110 510 C 120 560, 170 600, 230 590 C 290 610, 350 580, 360 520 C 410 510, 440 460, 420 410 C 460 390, 470 330, 430 300 C 450 250, 430 190, 380 170 C 390 110, 350 50, 290 40 C 260 10, 190 -10, 120 10 Z"
+        fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+      <g fill="rgba(255,255,255,.9)">
+        <circle cx="230" cy="120" r="4"/><circle cx="120" cy="230" r="4"/><circle cx="330" cy="260" r="4"/>
+        <circle cx="180" cy="380" r="4"/><circle cx="290" cy="440" r="4"/><circle cx="200" cy="500" r="4"/>
+      </g>
+      <g stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none">
+        <path d="M40 150 C 150 130, 300 140, 460 160"/>
+        <path d="M30 260 C 160 250, 320 255, 470 270"/>
+        <path d="M40 370 C 170 360, 320 365, 460 380"/>
+        <path d="M60 470 C 180 465, 310 468, 440 480"/>
+      </g>
+    </svg>
+    <div class="hero-inner">
+      <span class="eyebrow">Guía turística de Galicia</span>
+      <h1>Rías, granito y <em>néboa</em>.<br>Galicia, sin prisa.</h1>
+      <p class="lede">De los acantilados de As Catedrais a las tabernas de Santiago: encuentra playas, pueblos, rutas y platos que solo existen en el noroeste de la península.</p>
+      <div class="hero-stats">
+        <div><strong id="statTotal">24</strong>destinos</div>
+        <div><strong>6</strong>categorías</div>
+        <div><strong>4</strong>provincias</div>
+      </div>
+    </div>
+    <svg class="hero-bottom-contour contour" viewBox="0 0 1200 34" preserveAspectRatio="none">
+      <path d="M0 20 C 150 5, 300 32, 450 18 C 600 4, 750 30, 900 16 C 1000 8, 1100 24, 1200 14 V34 H0 Z" fill="currentColor"/>
+    </svg>
+  </section>
+
+  <section class="cat-section wrap" id="categorias">
+    <div class="cat-heading">
+      <div>
+        <span class="eyebrow">Explora por tipo</span>
+        <h2 style="font-size:1.7rem; margin-top:6px;">Categorías</h2>
+      </div>
+    </div>
+    <div class="cat-scroll" id="catScroll" role="tablist" aria-label="Categorías de destinos"></div>
+  </section>
+
+  <section class="results-section wrap">
+    <div class="results-meta">
+      <p id="resultsCount"></p>
+      <button id="clearFilters" type="button">Quitar filtros</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<div class="overlay-bg" id="overlayBg"></div>
+<div class="detail" id="detail" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="detail-hero" id="detailHero">
+    <button class="detail-close" id="detailClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="detail-body" id="detailBody"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="logo"><svg viewBox="0 0 32 32" fill="none"><path d="M16 3c5 6 9 10.5 9 16a9 9 0 1 1-18 0c0-5.5 4-10 9-16Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>GaliGuía</span></div>
+        <p>Una guía independiente para descubrir Galicia a tu ritmo, playa a playa y pulpeira a pulpeira.</p>
+      </div>
+      <div class="footer-cats" id="footerCats"></div>
+    </div>
+    <div class="footer-bottom">
+      <span>GaliGuía · Guía turística de Galicia</span>
+      <span>Datos con fines orientativos — comprueba horarios y accesos antes de viajar</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ ICONS ============ */
+const ICONS = {
+  playas: `<path d="M2 17c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M2 12c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".55"/><circle cx="17" cy="6" r="2.3" fill="currentColor"/>`,
+  ciudades: `<path d="M4 21V9l5-3v15M9 21V4l6 3v14M15 21v-8l5-3v11" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path d="M2 21h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
+  pueblos: `<path d="M4 20v-8L12 4l8 8v8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M8 20v-6h8v6" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="12" cy="3" r="1.4" fill="currentColor"/><path d="M12 4.3V8" stroke="currentColor" stroke-width="1.6"/>`,
+  naturaleza: `<path d="M12 2C8 7 5 10.5 5 14.5A7 7 0 0 0 19 14.5C19 10.5 16 7 12 2Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M12 22v-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
+  rutas: `<path d="M12 2c4 4 4 6 0 9-4-3-4-5 0-9Z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><path d="M12 11c-5.5.5-9 3-9 6.5S6.5 22 12 20.5c5.5 1.5 9-1 9-3S17.5 11.5 12 11Z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/>`,
+  gastronomia: `<circle cx="12" cy="9" r="5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M8 13c-2 2-4 3-4.5 6M16 13c2 2 4 3 4.5 6M9 13c-1 3-1 5 0 7M15 13c1 3 1 5 0 7M12 14c0 3 0 5-.5 6.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>`,
+  search:`<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="m21 21-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
+  pin:`<path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6" fill="none"/>`,
+  arrow:`<path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  check:`<path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  car:`<path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="2.5" y="13" width="19" height="5" rx="1.5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="7" cy="18" r="1.6" fill="currentColor"/><circle cx="17" cy="18" r="1.6" fill="currentColor"/>`,
+  bulb:`<path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 2a6 6 0 0 0-3.5 10.9c.6.45 1 1.15 1 1.9v.2h5v-.2c0-.75.4-1.45 1-1.9A6 6 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/>`,
+};
+function svg(name, cls){ return `<svg class="${cls||''}" viewBox="0 0 24 24">${ICONS[name]}</svg>`; }
+
+const CATS = [
+  {key:'playas', label:'Playas y rías', color:'#0D3B40'},
+  {key:'ciudades', label:'Ciudades', color:'#1F4D3E'},
+  {key:'pueblos', label:'Pueblos', color:'#8C3324'},
+  {key:'naturaleza', label:'Naturaleza', color:'#2C5F3E'},
+  {key:'rutas', label:'Rutas', color:'#3A4B7A'},
+  {key:'gastronomia', label:'Gastronomía', color:'#A6402D'},
+];
+
+/* ============ DATA ============ */
+const DESTINOS = [
+// PLAYAS Y RÍAS
+{id:'catedrais', cat:'playas', wiki:'Playa_de_las_Catedrales', name:'Praia das Catedrais', region:'Ribadeo · Lugo',
+ desc:'Arcos y cuevas de piedra tallados por el Atlántico, visitables solo con marea baja.',
+ full:'Su nombre oficial es Praia de Augas Santas, pero todo el mundo la conoce como As Catedrais por los arcos de piedra que la marea baja deja al descubierto. Es una de las imágenes más fotografiadas de Galicia y, en temporada alta, requiere reserva previa gratuita para acceder a la arena.',
+ hacer:['Consultar la tabla de mareas y reservar el acceso online si es temporada alta','Caminar bajo los arcos naturales durante la bajamar','Subir al mirador superior para ver el conjunto desde arriba','Probar el marisco en las tabernas de Ribadeo, a 10 minutos'],
+ llegar:'Por la A-8 hasta la salida de Barreiros/Ribadeo y después la N-634. El aparcamiento se encuentra a unos minutos a pie del acceso a la playa.',
+ tips:['Consulta siempre la hora de la bajamar antes de ir, sin ella no se ven los arcos','En julio y agosto es obligatorio reservar entrada gratuita con antelación','Lleva calzado que no le importe mojarse']},
+{id:'cies', cat:'playas', wiki:'Islas_Cíes', name:'Illas Cíes · Praia de Rodas', region:'Ría de Vigo · Pontevedra',
+ desc:'El archipiélago protegido con la playa que National Geographic definió como una de las mejores del mundo.',
+ full:'Las Islas Cíes cierran la ría de Vigo y forman parte del Parque Nacional Marítimo-Terrestre de las Illas Atlánticas. La Praia de Rodas, entre las dos islas principales, tiene arena blanca y aguas transparentes propias del Caribe. El acceso está limitado a un número diario de visitantes.',
+ hacer:['Reservar el ferry y el permiso de acceso con antelación, sobre todo en verano','Recorrer el sendero hasta el Faro de Cíes para ver la costa desde arriba','Bañarse en la Praia de Rodas o en la más recogida de Nosa Señora','Observar las colonias de gaviotas y cormoranes'],
+ llegar:'En ferry desde Vigo, Cangas o Baiona (temporada abril–octubre). El número de visitantes por día está limitado, por lo que conviene reservar plaza con semanas de antelación en verano.',
+ tips:['El acceso es solo en barco, no hay puente ni carretera','Camping solo en la zona habilitada y con reserva previa','Lleva agua y comida, la oferta en la isla es muy limitada']},
+{id:'carnota', cat:'playas', wiki:'Playa_de_Carnota', name:'Praia de Carnota', region:'Costa da Morte · A Coruña',
+ desc:'La playa más larga de Galicia, un arenal salvaje de más de siete kilómetros frente al monte Pindo.',
+ full:'Con más de siete kilómetros de longitud, es la playa más extensa de Galicia y una de las más largas de España. Está flanqueada por dunas y tiene como telón de fondo el granítico Monte Pindo, apodado la "montaña sagrada" por su carga de leyendas célticas.',
+ hacer:['Caminar o correr por la arena hasta perderte de la gente','Practicar surf o bodyboard en sus olas abiertas al Atlántico','Visitar el hórreo de Carnota, el más largo de Galicia, en el pueblo','Subir al Monte Pindo si te queda tiempo y buen calzado'],
+ llegar:'Por la AC-550 desde Muros o desde Noia, siguiendo indicaciones a Carnota. Hay varios accesos y aparcamientos a lo largo del arenal.',
+ tips:['Es playa abierta al Atlántico: revisa bandera y corrientes antes de bañarte','Apenas hay sombra, lleva protección solar y agua','El atardecer con el Pindo al fondo es el mejor momento para ir']},
+{id:'barra', cat:'playas', wiki:'Cangas_(España)', name:'Praia de Barra', region:'Cangas · Pontevedra',
+ desc:'Una de las playas más populares de la Ría de Vigo, con arena fina y vistas a las Cíes.',
+ full:'Situada en el municipio de Cangas, en la orilla norte de la Ría de Vigo, es una de las playas urbanas más apreciadas de la zona, con vistas directas al archipiélago de las Cíes en días despejados. Cuenta con buenos servicios y paseo marítimo.',
+ hacer:['Disfrutar de la vista de las Cíes al atardecer','Pasear por el paseo marítimo hasta el centro de Cangas','Practicar remo o paddle surf en aguas tranquilas','Comer marisco en las terrazas cercanas al puerto'],
+ llegar:'En coche por la PO-551 hasta Cangas, o en catamarán desde Vigo, que cruza la ría en unos 25 minutos.',
+ tips:['El catamarán desde Vigo es una alternativa cómoda para evitar tráfico','Buena opción con niños por su oleaje suave','Combínala con una visita al casco antiguo de Cangas']},
+
+// CIUDADES
+{id:'santiago', cat:'ciudades', wiki:'Santiago_de_Compostela', name:'Santiago de Compostela', region:'A Coruña',
+ desc:'Meta del Camino de Santiago, con una catedral barroca y un casco histórico Patrimonio de la Humanidad.',
+ full:'Capital de Galicia y final de las rutas del Camino de Santiago, su casco antiguo de piedra es Patrimonio de la Humanidad. La Catedral, con el Pórtico da Gloria restaurado y el botafumeiro en las misas de peregrinos, es el corazón de la ciudad, rodeada de plazas, mercados y tabernas centenarias.',
+ hacer:['Ver la llegada de peregrinos a la Praza do Obradoiro','Visitar el interior de la Catedral y, si coincide, la misa del botafumeiro','Recorrer el Mercado de Abastos y probar el pulpo o las empanadas','Perderte por las calles porticadas del casco histórico bajo la lluvia'],
+ llegar:'Aeropuerto de Santiago-Lavacolla con vuelos nacionales e internacionales; estación de tren y autobús bien conectadas con toda Galicia y Madrid en AVE.',
+ tips:['Lleva paraguas, es una de las ciudades más lluviosas de España','El casco histórico se recorre mejor a pie, es pequeño y peatonal','Reserva mesa si quieres comer en el Mercado de Abastos en fin de semana']},
+{id:'coruna', cat:'ciudades', wiki:'La_Coruña', name:'A Coruña', region:'A Coruña',
+ desc:'Ciudad atlántica de las galerías de cristal, con el faro romano en activo más antiguo del mundo.',
+ full:'Conocida como la "Ciudad de Cristal" por las galerías acristaladas de sus fachadas frente al mar, A Coruña combina playas urbanas, un paseo marítimo de más de 13 km y la Torre de Hércules, faro romano del siglo I aún en funcionamiento y Patrimonio de la Humanidad.',
+ hacer:['Subir a la Torre de Hércules y su parque escultórico','Pasear por el paseo marítimo desde Riazor hasta el puerto','Visitar la Ciudad Vieja y la Plaza de María Pita','Bañarte en la playa de Riazor, en pleno centro'],
+ llegar:'Aeropuerto de Alvedro a 15 minutos del centro; estación de tren con conexiones a Madrid y a toda Galicia.',
+ tips:['El paseo marítimo es llano y perfecto para bici o patines','Sube a la Torre de Hércules al atardecer para ver la puesta de sol','Prueba los pulpeiros del entorno del Mercado de San Agustín']},
+{id:'lugo', cat:'ciudades', wiki:'Lugo', name:'Lugo', region:'Lugo',
+ desc:'La única ciudad del mundo rodeada por una muralla romana completa e ininterrumpida.',
+ full:'Lugo conserva la muralla romana mejor conservada del mundo, un anillo de más de dos kilómetros que se puede recorrer a pie por su adarve. Declarada Patrimonio de la Humanidad, envuelve un casco histórico con restos romanos, catedral y una animada vida de tapeo.',
+ hacer:['Caminar la ronda completa sobre la muralla romana','Visitar los restos termales romanos junto al río Miño','Tapear por el casco histórico, donde la tapa suele ir incluida con la bebida','Ver la Catedral de Santa María, mezcla de estilos románico y barroco'],
+ llegar:'Por la A-6 desde A Coruña o la N-VI desde Madrid; estación de tren con conexiones regionales.',
+ tips:['En Lugo la tapa casi siempre es gratis con la consumición','El anillo de la muralla mide justo 2.117 metros, ideal para caminar sin prisa','Visítala en el Arde Lucus de junio si coincide con las fiestas romanas']},
+{id:'pontevedra', cat:'ciudades', wiki:'Pontevedra', name:'Pontevedra', region:'Pontevedra',
+ desc:'Modelo europeo de ciudad peatonal, con un casco histórico de plazas empedradas y cruceiros.',
+ full:'Pontevedra es referencia internacional en movilidad urbana: su centro histórico, casi enteramente peatonal, encadena plazas de piedra, soportales y cruceiros de granito. Fue villa marinera y aún conserva ese trazado medieval junto a la ría.',
+ hacer:['Recorrer sin prisa las plazas de A Ferrería, Teucro y A Verdura','Visitar la Basílica de Santa María a Maior, junto a la ría','Ver la singular capilla de A Peregrina, con planta de vieira','Cruzar a la Illa de Tambo o pasear por la ría en barco'],
+ llegar:'Por la AP-9 entre Vigo y Santiago; estación de tren con buenas conexiones a ambas ciudades.',
+ tips:['Es de las mejores ciudades de España para visitar sin coche','Las terrazas de A Ferrería son parada obligada al atardecer','Aprovecha para comer las empanadas de zamburiñas, típicas de la zona']},
+
+// PUEBLOS
+{id:'combarro', cat:'pueblos', wiki:'Combarro', name:'Combarro', region:'Poio · Pontevedra',
+ desc:'Aldea marinera con hórreos de piedra alineados al borde del agua, en la Ría de Pontevedra.',
+ full:'Combarro es uno de los pueblos marineros mejor conservados de Galicia, con casas de piedra, calles estrechas y decenas de hórreos y cruceiros construidos literalmente sobre las rocas, al borde de la Ría de Pontevedra. Declarado Conjunto Histórico-Artístico.',
+ hacer:['Pasear entre los hórreos junto al mar al atardecer','Recorrer las calles empedradas del barrio de arriba','Comer marisco fresco en una terraza frente a la ría','Fotografiar los cruceiros de piedra típicos del pueblo'],
+ llegar:'Por la PO-308 entre Pontevedra y Sanxenxo, a unos 15 minutos en coche desde Pontevedra.',
+ tips:['Ve a última hora de la tarde, cuando baja el calor y la luz es mejor','Aparca en las zonas habilitadas a la entrada, el pueblo es peatonal','Combínalo con una parada en Sanxenxo o Poio en la misma ruta']},
+{id:'cambados', cat:'pueblos', wiki:'Cambados', name:'Cambados', region:'Pontevedra',
+ desc:'Capital del vino Albariño, con un casco histórico de pazos de piedra alrededor de la Praza de Fefiñáns.',
+ full:'Cambados es la capital del Albariño, la denominación de origen que ha puesto el vino gallego en el mapa internacional. Su casco histórico, articulado en torno a la monumental Praza de Fefiñáns, conserva pazos señoriales y bodegas centenarias abiertas a la visita.',
+ hacer:['Visitar una bodega de Albariño con cata incluida','Pasear por la Praza de Fefiñáns, la más bonita del pueblo','Recorrer el paseo marítimo hasta A Illa da Fascada','Comer percebes o vieiras en el puerto, típicos de la ría de Arousa'],
+ llegar:'Por la PO-550 en la Ría de Arousa, a unos 35 minutos de Pontevedra y 45 de Santiago.',
+ tips:['Reserva la cata de bodega con antelación en temporada alta','El Festival do Albariño se celebra a principios de agosto','El atardecer desde el paseo marítimo es de los mejores de las Rías Baixas']},
+{id:'betanzos', cat:'pueblos', wiki:'Betanzos', name:'Betanzos', region:'A Coruña',
+ desc:'Villa medieval de las Mariñas coruñesas, famosa por su tortilla y su casco histórico gótico.',
+ full:'Antigua villa señorial, Betanzos conserva un notable conjunto gótico con las iglesias de Santa María del Azogue, San Francisco y Santiago. Es también célebre en toda España por su tortilla de patata, jugosa y muy poco cuajada, que se sirve en numerosos bares del centro.',
+ hacer:['Visitar las tres iglesias góticas del casco histórico','Probar la famosa tortilla betanceira en un bar del centro','Pasear por las Cantigas y Coles, las calles porticadas medievales','Acercarse al Parque do Pasatempo, jardín romántico del siglo XIX'],
+ llegar:'Por la AP-9 o N-VI a unos 25 minutos de A Coruña; también tiene estación de tren.',
+ tips:['Ve con hambre: la tortilla es de las mejores de Galicia','Las fiestas de San Roque en agosto son de las más animadas de la comarca','El casco histórico se visita bien en una mañana']},
+{id:'cebreiro', cat:'pueblos', wiki:'O_Cebreiro', name:'O Cebreiro', region:'Pedrafita do Cebreiro · Lugo',
+ desc:'Aldea de montaña de pallozas con techo de paja, primera parada del Camino Francés en Galicia.',
+ full:'A 1.300 metros de altitud, O Cebreiro es la puerta de entrada del Camino de Santiago Francés en Galicia y uno de los pueblos con más carácter de la ruta. Conserva pallozas, construcciones circulares de piedra con techo de paja de origen prerromano.',
+ hacer:['Visitar una palloza reconstruida como la vivían los pastores','Ver la iglesia de Santa María la Real, la más antigua del Camino en Galicia','Contemplar el amanecer sobre los Ancares desde el mirador','Sellar la credencial si haces el Camino de Santiago'],
+ llegar:'Por la N-VI o la A-6 desde Lugo o Ponferrada, subiendo el puerto de O Cebreiro (curvas de montaña).',
+ tips:['En invierno puede nevar y cerrar el puerto, consulta el estado de la carretera','Lleva ropa de abrigo incluso en verano, la niebla y el viento son frecuentes','Es un buen lugar para dormir si estás haciendo el Camino Francés']},
+
+// NATURALEZA
+{id:'eume', cat:'naturaleza', wiki:'Fragas_del_Eume', name:'Fragas do Eume', region:'A Coruña',
+ desc:'Uno de los bosques atlánticos mejor conservados de Europa, tallado por el río Eume.',
+ full:'El Parque Natural Fragas do Eume protege uno de los bosques de ribera atlánticos más extensos y mejor conservados de Europa, con robles, castaños y helechos centenarios que crecen en el cañón excavado por el río Eume. En su interior se esconde el Monasterio de Caaveiro.',
+ hacer:['Caminar la ruta hasta el Monasterio de Caaveiro entre el bosque','Reservar plaza en el centro de interpretación en temporada alta','Fotografiar los saltos de agua y las pasarelas de madera del sendero','Combinar la visita con Pontedeume y su casco histórico'],
+ llegar:'El acceso al parque suele hacerse desde el Centro de Interpretación de Caaveiro, en Monfero o Pontedeume; en temporada alta el acceso en coche está regulado.',
+ tips:['En verano el acceso motorizado puede requerir autobús lanzadera, infórmate antes','Lleva calzado de senderismo, el camino tiene desniveles','Es un bosque húmedo: la mejor época va de primavera a otoño']},
+{id:'ancares', cat:'naturaleza', wiki:'Los_Ancares', name:'Serra dos Ancares', region:'Lugo</br>', 
+ // note: region field cleaned below
+ desc:'Montañas verdes en el límite con León, con aldeas de pallozas y bosques casi vírgenes.',
+ full:'La Sierra de los Ancares, a caballo entre Galicia y León, es una de las zonas de montaña mejor conservadas del norte peninsular, con bosques atlánticos, brañas de alta montaña y pequeñas aldeas de pallozas todavía habitadas, como Piornedo.',
+ hacer:['Visitar el conjunto de pallozas de Piornedo','Hacer senderismo por las brañas y bosques de robles y abedules','Buscar fauna de montaña: corzos, jabalís y aves rapaces','Probar la matanza y los quesos artesanos de la comarca'],
+ llegar:'Desde Lugo por la N-VI y carreteras de montaña hacia Cervantes y Piornedo; las carreteras son estrechas y sinuosas.',
+ tips:['Revisa el tiempo antes de subir, la niebla cambia rápido en la sierra','Repostar combustible antes de entrar en la zona de montaña','Buena opción para desconectar fuera de la temporada más turística']},
+{id:'illasatlanticas', cat:'naturaleza', wiki:'Parque_nacional_marítimo-terrestre_de_las_Islas_Atlánticas_de_Galicia', name:'Parque Nacional Illas Atlánticas', region:'Rías Baixas · Pontevedra',
+ desc:'El único parque nacional marítimo-terrestre de Galicia, con Cíes, Ons, Sálvora y Cortegada.',
+ full:'Este parque nacional protege cuatro archipiélagos de las Rías Baixas —Cíes, Ons, Sálvora y Cortegada— con acantilados, dunas, praderas marinas y colonias de aves marinas. El acceso a cada isla está regulado para proteger su ecosistema.',
+ hacer:['Elegir isla según el tiempo disponible: Cíes o Ons son las más accesibles','Recorrer los senderos señalizados sin salirte de ellos','Observar colonias de gaviotas patiamarillas y cormoranes','Bucear o snorkelear en las aguas protegidas, donde esté permitido'],
+ llegar:'En ferry desde Vigo, Cangas, Baiona (a Cíes) o desde Sanxenxo, Portonovo y Bueu (a Ons), en temporada abril–octubre, con permiso de acceso.',
+ tips:['El número de visitantes diarios está limitado, reserva con antelación','Lleva toda el agua y comida que necesites, la oferta en las islas es mínima','Respeta los senderos señalizados para proteger la vegetación dunar']},
+{id:'ribeirasacra-nat', cat:'naturaleza', wiki:'Ribeira_Sacra', name:'Cañón del Sil', region:'Ribeira Sacra · Lugo/Ourense',
+ desc:'Un desfiladero de más de 500 metros tallado por el río Sil entre viñedos imposibles.',
+ full:'El cañón que forma el río Sil a su paso por la Ribeira Sacra alcanza más de 500 metros de desnivel, con laderas cubiertas de viñedos en bancales que se cultivan igual que hace siglos. Monasterios románicos se asoman al cañón desde hace más de mil años.',
+ hacer:['Hacer un crucero fluvial por los cañones del Sil','Visitar un mirador como los de Cabezoás o Vilouxe','Recorrer una bodega de viñedo heroico en ladera','Parar en algún monasterio como Santo Estevo o San Pedro de Rocas'],
+ llegar:'Los embarcaderos de crucero se encuentran en Doade y Los Peares, accesibles por carretera desde Monforte de Lemos u Ourense.',
+ tips:['Reserva el crucero fluvial con antelación en fines de semana de otoño','El otoño, con las viñas doradas, es la época más espectacular','Los miradores tienen poca protección, ve con cuidado con niños']},
+
+// RUTAS
+{id:'frances', cat:'rutas', wiki:'Camino_francés', name:'Camino Francés (tramo gallego)', region:'Desde O Cebreiro a Santiago',
+ desc:'El itinerario más transitado del Camino de Santiago, con sus últimos 160 km atravesando Galicia.',
+ full:'Los últimos 160 kilómetros del Camino Francés, desde O Cebreiro hasta Santiago de Compostela, son la distancia mínima exigida para conseguir la Compostela. Atraviesa Sarria, Portomarín, Palas de Rei, Arzúa y Melide entre bosques, aldeas y hórreos.',
+ hacer:['Sellar la credencial en al menos dos sellos por etapa desde Sarria','Parar en Melide a probar el pulpo á feira, parada clásica de peregrinos','Cruzar el embalse en el puente nuevo de Portomarín','Llegar a la Praza do Obradoiro y asistir a la misa del peregrino'],
+ llegar:'Sarria, el punto de inicio más habitual, tiene estación de tren con conexiones a A Coruña, Lugo y Madrid.',
+ tips:['Reserva alojamiento en verano, es el tramo más concurrido de todo el Camino','Sella la credencial en cada etapa para poder pedir la Compostela','Empieza a caminar temprano para evitar el calor y las multitudes']},
+{id:'portugues', cat:'rutas', wiki:'Camino_portugués', name:'Camino Portugués', region:'Desde Tui a Santiago',
+ desc:'La segunda ruta jacobea más popular, entrando a Galicia por el Miño desde Portugal.',
+ full:'El Camino Portugués cruza a Galicia por el río Miño en Tui y recorre las Rías Baixas hasta Santiago, pasando por Redondela, Pontevedra, Caldas de Reis y Padrón. Es más llano que el Francés y tiene fama de sencillo y menos masificado.',
+ hacer:['Cruzar el puente internacional entre Valença (Portugal) y Tui','Visitar Pontevedra a mitad de ruta, una de las mejores ciudades del recorrido','Parar en Padrón, tierra de los famosos pimientos','Elegir la variante por la costa (Camino Portugués de la Costa) si prefieres playas'],
+ llegar:'Tui tiene estación de tren con conexiones a Vigo y a Valença (Portugal), buen punto de inicio del tramo gallego.',
+ tips:['Es una alternativa con menos peregrinos que el Camino Francés','La variante de la costa pasa por playas de la Ría de Vigo y Pontevedra','En Padrón prueba los pimientos: "unos pican y otros no"']},
+{id:'faros', cat:'rutas', wiki:'Costa_da_Morte', name:'Ruta dos Faros', region:'Costa da Morte · A Coruña',
+ desc:'Sendero de largo recorrido que enlaza los faros y acantilados de la Costa da Morte.',
+ full:'La Ruta dos Faros (sendero GR-11) recorre más de 200 km de la Costa da Morte, uniendo Malpica con Fisterra a través de acantilados, playas salvajes y faros históricos como los de Cabo Vilán o Muxía. Debe su nombre a los numerosos naufragios que ha sufrido esta costa.',
+ hacer:['Recorrer una o varias etapas a pie, se puede hacer por tramos','Ver la puesta de sol en el Cabo Fisterra, el "fin del mundo" romano','Visitar el santuario de A Barca en Muxía, junto al mar','Fotografiar el Cabo Vilán y su faro, uno de los más altos de España'],
+ llegar:'La N-VI y carreteras secundarias conectan Malpica, Camariñas, Muxía y Fisterra; hay autobuses regulares entre los pueblos principales.',
+ tips:['Es una ruta muy expuesta al viento, lleva ropa de abrigo aunque haga sol','No hace falta hacerla entera: cada tramo funciona como excursión independiente','El atardecer en Fisterra es el momento más buscado por los visitantes']},
+{id:'vino', cat:'rutas', wiki:'Ribeiro_(denominación_de_origen)', name:'Ruta del Vino Ribeiro', region:'Ribeiro · Ourense',
+ desc:'Bodegas centenarias y viñedos en terrazas junto a los ríos Miño y Avia.',
+ full:'La denominación de origen Ribeiro, una de las más antiguas de España, se extiende por las riberas de los ríos Miño y Avia en la provincia de Ourense. Sus vinos blancos, tradicionalmente servidos en cuencos de barro llamados cuncas, se producen en bodegas familiares abiertas a la visita.',
+ hacer:['Visitar una bodega y catar el vino en la tradicional cunca de barro','Recorrer Ribadavia, capital histórica del Ribeiro con su barrio judío','Combinar la ruta con una parada en las Termas de Outariz','Pasear entre los viñedos en terrazas junto al río Avia'],
+ llegar:'Ribadavia, el centro de la ruta, está a unos 25 minutos de Ourense por la N-120.',
+ tips:['Reserva las catas con antelación, muchas bodegas son pequeñas y familiares','Ribadavia en Semana Santa celebra una recreación histórica muy conocida','Combínalo con una comida de pulpo o carne ó caldeiro en la zona']},
+
+// GASTRONOMÍA
+{id:'pulpo', cat:'gastronomia', wiki:'Pulpo_á_feira', name:'Pulpo á feira', region:'Especialmente O Carballiño y Melide',
+ desc:'El plato más icónico de Galicia: pulpo cocido, cortado con tijera y aliñado con pimentón y aceite.',
+ full:'Nacido en las ferias y romerías del interior, el pulpo á feira se cuece en calderas de cobre, se corta con tijeras sobre un plato de madera y se aliña con sal gruesa, pimentón dulce y picante y aceite de oliva. O Carballiño celebra en agosto la feria del pulpo más famosa de Galicia.',
+ hacer:['Pedirlo en una auténtica "pulpería" con plato de madera y cachelos','Acompañarlo de pan de pueblo y vino tinto en cunca, como manda la tradición','Visitar O Carballiño durante su feria del pulpo en agosto','Probar variantes como el pulpo á brasa en zonas costeras'],
+ llegar:'Se sirve en pulperías de toda Galicia; O Carballiño (Ourense) y Melide (A Coruña, en el Camino Francés) son dos de las cunas más reconocidas del plato.',
+ tips:['Pide siempre "cachelos" de acompañamiento: patata cocida con piel','En el Camino de Santiago, Melide es parada obligada para probarlo','Las mejores pulperías suelen llenarse los domingos al mediodía']},
+{id:'empanada', cat:'gastronomia', wiki:'Empanada_gallega', name:'Empanada gallega', region:'Toda Galicia',
+ desc:'Masa de pan rellena de atún, bacalao, carne o zamburiñas, presente en cualquier celebración.',
+ full:'La empanada gallega es una de las señas de identidad culinarias del país, con una masa de pan fina que envuelve rellenos tan variados como atún con tomate, bacalao con pasas, carne o zamburiñas. Cada panadería y cada casa tiene su receta propia.',
+ hacer:['Probar varias empanadas en distintos hornos para comparar masas y rellenos','Buscar la variante de zamburiñas, típica de las Rías Baixas','Comprarla para llevar como picnic en cualquier ruta o playa','Visitar un horno tradicional de leña donde aún se elaboran'],
+ llegar:'Se encuentra en panaderías y hornos de toda Galicia; Bandeira y Allariz son especialmente conocidos por sus empanadas.',
+ tips:['Se come fría o templada, es perfecta para llevar de picnic','Cada zona tiene su relleno de referencia, vale la pena comparar','Compra por peso en un horno tradicional, no en formato industrial']},
+{id:'percebes', cat:'gastronomia', wiki:'Pollicipes_pollicipes', name:'Percebes y marisco', region:'Costa da Morte y Rías Baixas',
+ desc:'Marisco capturado a mano en los acantilados más batidos por el Atlántico, de los más cotizados de España.',
+ full:'El percebe se recolecta a mano en las rocas más expuestas al oleaje, un oficio de alto riesgo que explica su elevado precio. La Costa da Morte, especialmente Cedeira y el entorno de Camariñas, y las Rías Baixas son las zonas de referencia, junto con otro marisco como el centollo o la nécora.',
+ hacer:['Pedirlos cocidos, simplemente con sal, en una marisquería costera','Visitar una lonja para ver la subasta del marisco recién llegado','Combinar con centollo o nécora si es temporada','Preguntar siempre la procedencia, el precio varía mucho según la zona'],
+ llegar:'Marisquerías de toda la costa gallega, con especial fama en la Costa da Morte y en las Rías Baixas.',
+ tips:['El precio cambia mucho según la zona de captura, pregunta antes de pedir','Se comen con las manos: se pela la piel y se come la parte carnosa','La temporada más recomendable suele ir de otoño a primavera']},
+{id:'albarino', cat:'gastronomia', wiki:'Albariño', name:'Queso de Tetilla y vino Albariño', region:'Rías Baixas · Pontevedra',
+ desc:'El maridaje gallego por excelencia: vino blanco Albariño con el suave queso de Tetilla.',
+ full:'El Albariño es el vino blanco gallego más internacional, con denominación de origen Rías Baixas, aromático y fresco gracias al clima atlántico. Suele acompañarse del queso de Tetilla, de pasta blanda, sabor suave y su característica forma cónica.',
+ hacer:['Visitar una bodega de Rías Baixas para catar el Albariño en origen','Comprar queso de Tetilla en un mercado local para probarlo en casa','Maridar ambos productos con mariscos o pescado a la gallega','Acercarte a Cambados durante el Festival do Albariño en agosto'],
+ llegar:'Bodegas y queserías repartidas por el Salnés y el Condado, ambas dentro de la provincia de Pontevedra.',
+ tips:['El Albariño se sirve bien frío, entre 8 y 10 grados','El queso de Tetilla es suave: buena opción si no te gustan los quesos fuertes','Muchas bodegas ofrecen visita guiada más cata por un precio moderado']},
+];
+// Clean an accidental stray tag from data entry
+DESTINOS.forEach(d=>{ d.region = d.region.replace('</br>','').trim(); });
+
+/* ============ STATE ============ */
+let activeCat = null;
+let query = '';
+
+/* ============ RENDER: CATEGORY CHIPS ============ */
+const catScroll = document.getElementById('catScroll');
+function countFor(key){ return DESTINOS.filter(d=>d.cat===key).length; }
+CATS.forEach(c=>{
+  const btn = document.createElement('button');
+  btn.className = 'cat-chip';
+  btn.type = 'button';
+  btn.dataset.cat = c.key;
+  btn.setAttribute('role','tab');
+  btn.innerHTML = `<span class="ico">${svg(c.key)}</span> ${c.label} <span class="count">${countFor(c.key)}</span>`;
+  btn.addEventListener('click', ()=>{
+    activeCat = activeCat === c.key ? null : c.key;
+    render();
+    document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  catScroll.appendChild(btn);
+});
+
+// footer category links
+const footerCats = document.getElementById('footerCats');
+CATS.forEach(c=>{
+  const a = document.createElement('a');
+  a.href = '#categorias';
+  a.textContent = c.label;
+  a.addEventListener('click', ()=>{ activeCat = c.key; render(); });
+  footerCats.appendChild(a);
+});
+
+/* ============ NORMALIZE for search ============ */
+function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+/* ============ RENDER: GRID ============ */
+const grid = document.getElementById('grid');
+const resultsCount = document.getElementById('resultsCount');
+const clearBtn = document.getElementById('clearFilters');
+
+function catMeta(key){ return CATS.find(c=>c.key===key); }
+
+function filtered(){
+  return DESTINOS.filter(d=>{
+    const matchesCat = !activeCat || d.cat === activeCat;
+    const q = norm(query);
+    const matchesQuery = !q || norm(d.name+' '+d.region+' '+d.desc).includes(q);
+    return matchesCat && matchesQuery;
+  });
+}
+
+function render(){
+  document.querySelectorAll('.cat-chip').forEach(b=>{
+    b.classList.toggle('active', b.dataset.cat === activeCat);
+    b.setAttribute('aria-selected', b.dataset.cat === activeCat ? 'true':'false');
+  });
+
+  const items = filtered();
+  resultsCount.textContent = activeCat || query
+    ? `${items.length} ${items.length===1?'destino encontrado':'destinos encontrados'}`
+    : `Mostrando los ${items.length} destinos de GaliGuía`;
+  clearBtn.classList.toggle('show', !!(activeCat || query));
+
+  grid.innerHTML = '';
+  if(items.length === 0){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <h3>Sin resultados</h3>
+      <p>No encontramos destinos para “${query}”. Prueba con otra palabra o quita los filtros.</p>
+    </div>`;
+    return;
+  }
+  items.forEach(d=>{
+    const meta = catMeta(d.cat);
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'card';
+    card.style.setProperty('--cat-color', meta.color);
+    card.setAttribute('aria-label', `Ver ${d.name}`);
+    card.innerHTML = `
+      <div class="card-media" data-img>
+        <div class="ico-big">${svg(d.cat)}</div>
+        <span class="place-label">${meta.label}</span>
+      </div>
+      <div class="card-body">
+        <span class="eyebrow">${meta.label}</span>
+        <h3>${d.name}</h3>
+        <span class="loc">${svg('pin')} ${d.region}</span>
+        <p class="desc">${d.desc}</p>
+        <span class="card-cta">Descubrir ${svg('arrow')}</span>
+      </div>
+    `;
+    card.addEventListener('click', ()=> openDetail(d));
+    grid.appendChild(card);
+    loadImage(d, card.querySelector('[data-img]'));
+  });
+}
+
+/* ============ IMAGE LOADING (Wikipedia REST API, with graceful fallback) ============ */
+const imgCache = {};
+async function fetchWikiImage(title){
+  if(imgCache[title] !== undefined) return imgCache[title];
+  try{
+    const res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+    if(!res.ok) throw new Error('no ok');
+    const data = await res.json();
+    const url = (data.originalimage && data.originalimage.source) || (data.thumbnail && data.thumbnail.source) || null;
+    imgCache[title] = url;
+    return url;
+  }catch(e){
+    imgCache[title] = null;
+    return null;
+  }
+}
+function loadImage(d, mediaEl){
+  fetchWikiImage(d.wiki).then(url=>{
+    if(!url || !mediaEl.isConnected) return;
+    const img = new Image();
+    img.alt = d.name;
+    img.loading = 'lazy';
+    img.onload = ()=>{ img.classList.add('loaded'); };
+    img.src = url;
+    mediaEl.appendChild(img);
+  });
+}
+
+/* ============ DETAIL OVERLAY ============ */
+const detail = document.getElementById('detail');
+const overlayBg = document.getElementById('overlayBg');
+const detailHero = document.getElementById('detailHero');
+const detailBody = document.getElementById('detailBody');
+let lastFocused = null;
+
+function openDetail(d){
+  lastFocused = document.activeElement;
+  const meta = catMeta(d.cat);
+  detail.style.setProperty('--cat-color', meta.color);
+  detailHero.innerHTML = `
+    <button class="detail-close" id="detailClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg></button>
+    <div class="ico-big">${svg(d.cat)}</div>
+  `;
+  detailHero.style.background = `linear-gradient(135deg, ${meta.color}, #142420)`;
+  document.getElementById('detailClose').addEventListener('click', closeDetail);
+
+  detailBody.innerHTML = `
+    <span class="eyebrow">${meta.label}</span>
+    <h2>${d.name}</h2>
+    <span class="detail-loc">${svg('pin')} ${d.region}</span>
+    <p class="detail-desc">${d.full}</p>
+
+    <div class="detail-section">
+      <h4><span class="ico">${svg('check')}</span>Qué hacer</h4>
+      <ul class="detail-list">${d.hacer.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>
+
+    <div class="detail-section">
+      <h4><span class="ico">${svg('car')}</span>Cómo llegar</h4>
+      <p class="detail-howto">${d.llegar}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4><span class="ico">${svg('bulb')}</span>Consejos</h4>
+      <ul class="detail-list">${d.tips.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>
+  `;
+
+  overlayBg.classList.add('open');
+  detail.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  detail.focus();
+  loadImage(d, detailHero);
+
+  overlayBg.onclick = closeDetail;
+}
+function closeDetail(){
+  overlayBg.classList.remove('open');
+  detail.classList.remove('open');
+  document.body.style.overflow = '';
+  if(lastFocused) lastFocused.focus();
+}
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && detail.classList.contains('open')) closeDetail();
+});
+
+/* ============ SEARCH ============ */
+const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
+searchForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  query = searchInput.value.trim();
+  render();
+  document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+});
+searchInput.addEventListener('input', ()=>{
+  query = searchInput.value.trim();
+  render();
+});
+clearBtn.addEventListener('click', ()=>{
+  activeCat = null; query=''; searchInput.value='';
+  render();
+});
+
+/* mobile search toggle */
+const searchToggle = document.getElementById('searchToggle');
+if(searchToggle){
+  searchToggle.addEventListener('click', ()=>{
+    searchForm.classList.toggle('open');
+    if(searchForm.classList.contains('open')) searchInput.focus();
+  });
+}
+
+/* ============ INIT ============ */
+document.getElementById('statTotal').textContent = DESTINOS.length;
+render();
+</script>
+</body>
+</html>
